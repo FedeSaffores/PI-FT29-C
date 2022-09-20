@@ -6,8 +6,8 @@ const TemperamentRoutes = require("./TemperamentRoutes.js");
 // Ejemplo: const authRouter = require('./auth.js');
 
 const router = Router();
-router.use("/temperamentos", TemperamentRoutes);
 router.use("/dogs", DogsRoutes);
+router.use("/temperamentos", TemperamentRoutes);
 router.post("/mekeDogs", newDog);
 
 // Configurar los routers

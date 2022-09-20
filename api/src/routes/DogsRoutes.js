@@ -1,10 +1,14 @@
 const { Router } = require("express");
-const { getId, allDogs, getName } = require("../Controllers/ControllersDogs");
+const {
+  getId,
+  getName,
+  getAllDogs,
+} = require("../Controllers/ControllersDogs");
 
 const router = Router();
 
-router.use("/:idDogs", getId);
 router.use("/name", getName);
-router.use("/", allDogs);
+router.use("/:idDogs", getId);
+router.use("/", getAllDogs);
 
 module.exports = router;

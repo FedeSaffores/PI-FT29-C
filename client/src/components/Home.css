@@ -1,0 +1,16 @@
+.Link{
+    text-decoration: none;
+ font-size: 15px;
+    
+}
+body{
+    background-image: url(./Imagen\ Perros.webp);
+    background-size: cover;
+    background-attachment: fixed;
+    }
+img {
+        width: 300px;
+        border: 5px white solid;
+        border-radius: 50px;
+    };
+    

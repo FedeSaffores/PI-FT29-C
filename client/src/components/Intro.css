@@ -1,0 +1,16 @@
+.Intro{
+    display: flex;
+
+    text-decoration: none;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 45px;
+    font-weight: 800px;
+    margin: 70px 80px 70px 80px;
+    background-color: rgb(158, 232, 89);
+    padding: 20px 30px;
+    border-radius: 20px;
+}
+.Intro:hover{
+    padding:40px;
+    background-color: rgb(68, 124, 202);
+}

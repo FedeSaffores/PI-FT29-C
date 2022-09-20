@@ -25,32 +25,37 @@ const dogsApi = async () => {
 
 const dataBdogs = async () => {
   return await Dog.findAll({
-    include: {
-      model: Temperamentos,
-      attributes: ["name"],
-      through: { attributes: [] },
-    },
+    include: [
+      {
+        model: Temperamentos,
+        attributes: ["name"],
+      },
+    ],
   });
 };
-const allDogs = async (req, res) => {
+const getAllDogs = async (req, res) => {
+  const todosPerros = await allDogs();
+  res.send(todosPerros);
+};
+const allDogs = async () => {
   const infoApi = await dogsApi();
   const infoDb = await dataBdogs();
+  console.log(infoDb);
   const dbjoin = infoDb.map((e) => {
     return {
       id: e.id,
       name: e.name,
-      image: e.image.url,
-      height: e.height.metric,
-      weight: e.weight.metric,
+      image: e.image,
+      height: e.height,
+      weight: e.weight,
       lifespan: e.life_span,
-      temperament: e.temperament,
+      temperament: e.temperamentos.map((e) => e.name).join(","),
     };
   });
-  res.json(infoApi.concat(dbjoin));
+  return infoApi.concat(dbjoin);
 };
 const getName = async (req, res) => {
   const { name } = req.query;
-
   const dataDogs = await allDogs();
 
   if (name) {
@@ -76,7 +81,6 @@ const getId = async (req, res) => {
           `https://api.thedogapi.com/v1/images/search?breed_id=${idDogs}`
         )
       ).data[0];
-      console.log(api);
       const dog = {
         id: api.id,
         name: api.name,
@@ -95,7 +99,16 @@ const getId = async (req, res) => {
           throught: { atrributtes: [] },
         },
       });
-      res.send(dogsDb);
+      const dog = {
+        id: dogsDb.id,
+        name: dogsDb.name,
+        height: dogsDb.height,
+        weight: dogsDb.weight,
+        lifespan: dogsDb.lifespan,
+        image: dogsDb.image,
+        temperament: dogsDb.temperamentos.map((e) => e.name).join(","),
+      };
+      res.send(dog);
     }
   } catch (error) {
     res.status(404).send(`El id:${idDogs}, no encontrado`);
@@ -103,7 +116,7 @@ const getId = async (req, res) => {
 };
 
 module.exports = {
-  allDogs,
   getName,
   getId,
+  getAllDogs,
 };

@@ -1,47 +1,41 @@
-const { Dogs, Temperamentos } = require("../db");
+const { Dog, Temperamentos } = require("../db");
 const axios = require("axios");
 const sequelize = require("sequelize");
 
 const newDog = async (req, res) => {
-  const { name, height, weight, lifespan, temperamento } = req.body;
-  try {
-    console.log(name);
-    if (!name) return res.json({ info: "Nombre obligatorio" });
-    const existe = await Dogs.finOne({ where: { name: name } });
-    if (existe) return req.json({ info: "El perro ya exite" });
+  const { name, height, weight, lifespan, temperament = [] } = req.body;
 
-    const dogs = await Dogs.create({
+  try {
+    if (!name) return res.json({ info: "Nombre obligatorio" });
+    const existe = await Dog.findOne({ where: { name: name } });
+    if (existe) return res.json({ info: "El perro ya exite" });
+
+    const dogs = await Dog.create({
       name,
       height,
       weight,
       lifespan,
-      temperamento,
     });
+    console.log(dogs);
     await Promise.all(
-      temperamento.map(async (e) => {
-        await dogs.addTemperamentos([
-          (
-            await Temperamentos.findOrCreate({
-              where: { name: e },
-            })
-          ).dataValues.id,
-        ]);
+      temperament.map(async (e) => {
+        const [temperamento, _] = await Temperamentos.findOrCreate({
+          where: { id: e },
+        });
+        await dogs.addTemperamentos(temperamento);
       })
     );
-    const relacionTablas = await Dogs.findOne({
-      where: { name: name },
-      include: {
-        model: Temperamentos,
-        attributes: ["name"],
-        throught: { attributes: [] },
-      },
-    });
     res.json({ info: "Dog Creado" });
-    return relacionTablas;
   } catch (error) {
+    console.log(error);
     res.status(404).json({ info: "DOG no creado" });
   }
 };
+const getAllTemp = async (req, res) => {
+  const allTemp = await listarTemperamento();
+  res.send(allTemp);
+};
+
 async function listarTemperamento(req, res, next) {
   try {
     const count = await Temperamentos.count();
@@ -50,7 +44,7 @@ async function listarTemperamento(req, res, next) {
         .data;
       const dataTemp = temperamentos
         .map((e) => e.temperament)
-        .join()
+        .join("")
         .split(",")
         .filter((e) => e.length);
       dataTemp.forEach((e) => {
@@ -58,33 +52,43 @@ async function listarTemperamento(req, res, next) {
           where: { name: e },
         });
       });
-    }
-    if (req.query.name) {
-      const tipeTemp = Temperamentos.findAll({
-        where: {
-          name: { [sequelize.Op.iLike]: "%" + req.query.name + "%" },
-        },
-      });
-      res.send(tipeTemp);
+      //console.log(temperamentos);
     }
     const typeDb = await Temperamentos.findAll();
-    res.send(typeDb);
+    return typeDb;
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 }
+const getTempName = async (req, res) => {
+  const { name } = req.query;
+  const dataTemp = await listarTemperamento();
+
+  if (name) {
+    const TempName = await dataTemp.filter((e) =>
+      e.name.toLowerCase().includes(name.toLowerCase())
+    );
+    TempName.length
+      ? res.send(TempName)
+      : res.status(404).send("No existe el Nombre");
+  } else {
+    res.status(200).send(dataTemp);
+  }
+};
 async function getTemperamentByID(req, res) {
   try {
     let temp = await Temperamentos.findOne({
-      where: { id: req.params.idTemperamento },
+      where: { id: req.params.idTemperament },
     });
+    console.log(temp);
     res.json(temp);
   } catch (error) {
     console.log(error);
   }
 }
 module.exports = {
+  getTempName,
   getTemperamentByID,
-  listarTemperamento,
+  getAllTemp,
   newDog,
 };
