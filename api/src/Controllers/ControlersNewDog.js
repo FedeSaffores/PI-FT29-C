@@ -52,7 +52,7 @@ async function listarTemperamento(req, res, next) {
           where: { name: e },
         });
       });
-      //console.log(temperamentos);
+      console.log(temperamentos);
     }
     const typeDb = await Temperamentos.findAll();
     return typeDb;

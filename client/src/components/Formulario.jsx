@@ -19,7 +19,8 @@ const Formulario = () => {
     heightMax: "",
     weightMin: "",
     weightMax: "",
-    lifespan: "",
+    lifespanMin: "",
+    lifespanMax: "",
     temperament: [],
   });
   const stateReset = () => {
@@ -29,7 +30,8 @@ const Formulario = () => {
       heightMax: "",
       weightMin: "",
       weightMax: "",
-      lifespan: "",
+      lifespanMin: "",
+      lifespanMax: "",
       temperament: [],
     });
     setInputName("");
@@ -40,6 +42,8 @@ const Formulario = () => {
     heightMax: "",
     weightMin: "",
     weightMax: "",
+    lifespanMin: "",
+    lifespanMax: "",
     lifespan: "",
     temperament: [],
   });
@@ -74,68 +78,74 @@ const Formulario = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    let objErr = {};
+    console.log(formulario.name, /^[a-zA-Z ]+$/.test(formulario.name.trim()));
+    if (!/^[a-zA-Z ]+$/.test(formulario.name.trim())) {
+      objErr["name"] = "El nombre  tiene que contener solo letras";
+      //expresion regular, contiene solo letras ya sea mayuscula y minuscula.
+    }
+    if (isNaN(parseInt(formulario.heightMax))) {
+      objErr["heightMax"] = "La altura maximo no es un numero";
+    }
+    if (isNaN(parseInt(formulario.heightMin))) {
+      objErr["heightMin"] = "La altura minima no es un numero";
+    }
+    if (formulario.heightMax < formulario.heightMin) {
+      objErr[
+        "heightMax"
+      ] = `La altura maximo debe ser mayor a ${formulario.heightMin}`;
+    }
+    if (formulario.heightMin > formulario.heightMax) {
+      objErr[
+        "heightMin"
+      ] = `La altura minimo debe ser menor a ${formulario.heightMax}`;
+    }
+    if (isNaN(parseInt(formulario.weightMin))) {
+      objErr["weightMin"] = "El peso minimo no es un numero";
+    }
+    if (isNaN(parseInt(formulario.weightMax))) {
+      objErr["weightMax"] = "El peso maximo no es un numero";
+    }
+    if (formulario.weightMin > formulario.weightMax) {
+      objErr[
+        "weightMin"
+      ] = `El peso minimo debe ser menor a ${formulario.weightMax}`;
+    }
+    if (formulario.weightMax < formulario.weightMin) {
+      objErr[
+        "weightMax"
+      ] = `El peso maximo no debe ser menor a ${formulario.weightMin}`;
+    }
+    if (isNaN(parseInt(formulario.lifespanMax))) {
+      objErr["lifespanMax"] = "Es necesario agregar al menos un numero";
+    }
+    if (isNaN(parseInt(formulario.lifespanMin))) {
+      objErr["lifespanMin"] = "Es necesario agregar al menos un numero";
+    }
+    if (formulario.lifespanMin > formulario.lifespanMax) {
+      objErr[
+        "lifespanMin"
+      ] = `El Minimo expectativa de vida no puede ser mayor a ${formulario.lifespanMax}`;
+    }
+    if (formulario.temperament.length === 0) {
+      objErr["temperament"] = "Es necesario almenos agragar un temperamento";
+    }
+    if (Object.keys(objErr).length === 0) {
+      const newDog = {
+        name: formulario.name,
+        height: `${formulario.heightMin} - ${formulario.heightMax}`,
+        weight: `${formulario.weightMin} - ${formulario.weightMax}`,
+        lifespan: `${formulario.lifespanMin} - ${formulario.lifespanMax} years`,
+        temperament: formulario.temperament,
+      };
 
-    if (/^[a-zA-Z ]+$/.test(formulario.name.trim()))
-      setError({
-        ...errors,
-        name: "El nombre  tiene que contener solo letras",
-      });
-    if (isNaN(parseInt(formulario.heightMax)))
-      setError({
-        ...errors,
-        heightMax: "El peso maximo no es un numero",
-      });
-    if (isNaN(parseInt(formulario.heightMin)))
-      setError({
-        ...errors,
-        heightMin: "El peso minimo no es un numero",
-      });
-    if (formulario.heightMax < formulario.heightMin)
-      setError({
-        ...errors,
-        heightMax: `El peso maximo debe ser mayor a ${formulario.heightMin}`,
-      });
-    if (formulario.heightMin > formulario.heightMax)
-      setError({
-        ...errors,
-        heightMin: `El peso minimo debe ser mayor a ${formulario.heightMax}`,
-      });
-    if (isNaN(parseInt(formulario.weightMin)))
-      setError({
-        ...errors,
-        weightMin: "La altura minima no es un numero",
-      });
-    if (isNaN(parseInt(formulario.weightMax)))
-      setError({
-        ...errors,
-        weightMax: "La altura minima no es un numero",
-      });
-    if (formulario.weightMin > formulario.weightMax)
-      setError({
-        ...errors,
-        weightMin: `La altura minima no debe ser mayor a ${formulario.weightMax}`,
-      });
-    if (formulario.weightMax < formulario.weightMin)
-      setError({
-        ...errors,
-        weightMax: `La altura maxima no debe ser menor a ${formulario.weightMin}`,
-      });
-    if (!formulario.temperament)
-      setError({
-        ...errors,
-        temperament: "Es necesario almenos agragar un temperamento",
-      });
-    const newDog = {
-      name: formulario.name,
-      height: `${formulario.heightMin} - ${formulario.heightMax}`,
-      weight: `${formulario.weightMin} - ${formulario.weightMax}`,
-      lifespan: formulario.lifespan,
-      temperament: formulario.temperament,
-    };
-    if (newDog) {
-      dispatch(createDogs(newDog));
-      stateReset();
-      alert("Dog created");
+      if (newDog) {
+        dispatch(createDogs(newDog));
+        stateReset();
+        alert("Dog created");
+      }
+    } else {
+      setError(objErr);
     }
   };
   return (
@@ -152,6 +162,7 @@ const Formulario = () => {
           placeholder="Name your Dog"
           onChange={setDataHandler}
         />
+        <div>{errors?.name}</div>
         <h1>MINIMUM HEIGHT</h1>
         <input
           className="height1"
@@ -162,6 +173,7 @@ const Formulario = () => {
           value={formulario.heightMin}
           onChange={setDataHandler}
         />
+        <div>{errors?.heightMin}</div>
         <h2>MAXIMUM HEIGHT</h2>
         <input
           className="height2"
@@ -172,36 +184,50 @@ const Formulario = () => {
           value={formulario.heightMax}
           onChange={setDataHandler}
         />
+        <div>{errors?.heightMax}</div>
         <h2>MINIMUM WEIGHT</h2>
         <input
           className="weightMin"
           type="text"
           name="weightMin"
-          autocomplete="off"
+          autoComplete="off"
           placeholder="Min Weight"
           value={formulario.weightMin}
           onChange={setDataHandler}
         />
+        <div>{errors?.weightMin}</div>
         <h2>MAXIMUM WEIGHT</h2>
         <input
           className="weightMax"
           type="text"
           name="weightMax"
-          autocompleat="off"
+          autoComplete="off"
           placeholder="Max Weight"
           value={formulario.weightMax}
           onChange={setDataHandler}
         />
-        <h2>LIFESPAN</h2>
+        <div>{errors?.weightMax}</div>
+        <h2>MINIMUM LIFESPAN</h2>
         <input
-          className="life"
+          className="lifemin"
           type="text"
-          name="lifespan"
-          autocompleat="off"
-          placeholder="Put the Lifespan"
-          value={formulario.lifespan}
+          name="lifespanMin"
+          autoComplete="off"
+          placeholder="Put the Mimimum Lifespan"
+          value={formulario.lifespanMin}
           onChange={setDataHandler}
         />
+        <div>{errors?.lifespanMin}</div>
+        <h2>MAXIMUM LIFESPAN</h2>
+        <input
+          className="lifemax"
+          type="text"
+          name="lifespanMax"
+          autoComplete="off"
+          placeholder="Put the Maximum Lifespan"
+          onChange={setDataHandler}
+        />
+        <div>{errors.lifespanMax}</div>
         <h2>TEMPERAMENT</h2>
         <input
           className="Temperamento"
@@ -211,6 +237,7 @@ const Formulario = () => {
           placeholder="Search Temperament"
           onChange={submitInput}
         />
+        <div>{errors.temperament}</div>
         <select
           multiple
           name="temperament"

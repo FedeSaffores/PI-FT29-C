@@ -3,6 +3,23 @@
  font-size: 15px;
     
 }
+.Linkmake{
+    display:block;
+    border-radius: 200px;
+    margin:30px 100px;
+    padding: 10px 20px;
+    background-color: bisque;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    color:Red;
+}
+.Linkmake:hover{
+   
+    margin:35px 110px;
+    background-color: rgb(198, 255, 196);
+}
+
 body{
     background-image: url(./Imagen\ Perros.webp);
     background-size: cover;
@@ -11,6 +28,6 @@ body{
 img {
         width: 300px;
         border: 5px white solid;
-        border-radius: 50px;
+        border-radius: 200px;
     };
     

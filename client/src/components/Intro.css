@@ -1,8 +1,10 @@
 .Intro{
-    display: flex;
-
+    position:absolute;
+    top:100px;
+    right:475px;
     text-decoration: none;
-    font-family:'Courier New', Courier, monospace;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color:black;
     font-size: 45px;
     font-weight: 800px;
     margin: 70px 80px 70px 80px;
@@ -11,6 +13,5 @@
     border-radius: 20px;
 }
 .Intro:hover{
-    padding:40px;
     background-color: rgb(68, 124, 202);
 }
