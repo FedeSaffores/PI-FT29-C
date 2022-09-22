@@ -7,6 +7,7 @@ import {
   getDogs,
   getTemperamentos,
 } from "../redux/actions/actions";
+import "./Formulario.css";
 
 const Formulario = () => {
   const allTemp = useSelector((state) => state.Temperamentos);
@@ -153,7 +154,7 @@ const Formulario = () => {
       <Link to="/dogs" className="Home">
         HOME
       </Link>
-      <h1>Create a New Dog</h1>
+      <h2 className="CreateDog">Create a New Dog</h2>
       <form onSubmit={(e) => submitForm(e)} onReset={() => stateReset()}>
         <input
           className="Nombre"
@@ -162,8 +163,8 @@ const Formulario = () => {
           placeholder="Name your Dog"
           onChange={setDataHandler}
         />
-        <div>{errors?.name}</div>
-        <h1>MINIMUM HEIGHT</h1>
+        <div className="error">{errors?.name}</div>
+        <h2 className="bt1">MINIMUM HEIGHT</h2>
         <input
           className="height1"
           type="text"
@@ -173,7 +174,7 @@ const Formulario = () => {
           value={formulario.heightMin}
           onChange={setDataHandler}
         />
-        <div>{errors?.heightMin}</div>
+        <div className="error">{errors?.heightMin}</div>
         <h2>MAXIMUM HEIGHT</h2>
         <input
           className="height2"
@@ -184,7 +185,7 @@ const Formulario = () => {
           value={formulario.heightMax}
           onChange={setDataHandler}
         />
-        <div>{errors?.heightMax}</div>
+        <div className="error">{errors?.heightMax}</div>
         <h2>MINIMUM WEIGHT</h2>
         <input
           className="weightMin"
@@ -195,7 +196,7 @@ const Formulario = () => {
           value={formulario.weightMin}
           onChange={setDataHandler}
         />
-        <div>{errors?.weightMin}</div>
+        <div className="error">{errors?.weightMin}</div>
         <h2>MAXIMUM WEIGHT</h2>
         <input
           className="weightMax"
@@ -206,7 +207,7 @@ const Formulario = () => {
           value={formulario.weightMax}
           onChange={setDataHandler}
         />
-        <div>{errors?.weightMax}</div>
+        <div className="error">{errors?.weightMax}</div>
         <h2>MINIMUM LIFESPAN</h2>
         <input
           className="lifemin"
@@ -217,7 +218,7 @@ const Formulario = () => {
           value={formulario.lifespanMin}
           onChange={setDataHandler}
         />
-        <div>{errors?.lifespanMin}</div>
+        <div className="error">{errors?.lifespanMin}</div>
         <h2>MAXIMUM LIFESPAN</h2>
         <input
           className="lifemax"
@@ -227,7 +228,7 @@ const Formulario = () => {
           placeholder="Put the Maximum Lifespan"
           onChange={setDataHandler}
         />
-        <div>{errors.lifespanMax}</div>
+        <div className="error">{errors.lifespanMax}</div>
         <h2>TEMPERAMENT</h2>
         <input
           className="Temperamento"
@@ -237,7 +238,7 @@ const Formulario = () => {
           placeholder="Search Temperament"
           onChange={submitInput}
         />
-        <div>{errors.temperament}</div>
+        <div className="error">{errors.temperament}</div>
         <select
           multiple
           name="temperament"

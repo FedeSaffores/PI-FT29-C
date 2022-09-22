@@ -1,0 +1,48 @@
+.Name{
+    color:brown;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+.Height{
+    margin-left: auto;
+    margin-right: auto;
+  
+    font-size: 20px;
+    background-color: brown;
+    padding: 20px;
+    width:100px;
+    border-radius: 25px;
+    border:5px solid white
+}
+.weight{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    background-color: brown;
+    padding: 20px;
+    width:100px;
+    border-radius: 25px;
+    border:5px solid white
+}
+.temperament{
+    font-size: 20px;
+    background-color: brown;
+    padding: 20px;
+    border-radius: 25px;
+    border:5px solid white
+
+}
+.Lifespan{
+font-size: 20px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 10px;
+background-color: brown;
+padding: 15px;
+border-radius: 25px;
+width: 200px;
+border:5px solid white
+}

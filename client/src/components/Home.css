@@ -1,29 +1,104 @@
+.btnSiguiente{
+    background-color: rgb(222, 120, 120);
+    border-radius: 2px black;
+    cursor: pointer;
+    border-radius: 25px;
+}
+.btnAnterior{
+    background-color:  rgb(222, 120, 120);
+    border-radius: 2px black;
+    cursor: pointer;
+    border-radius: 25px;
+}
 .Link{
+    color: brown;
+    display: block;
     text-decoration: none;
- font-size: 15px;
+ font-size: 30px;
     
 }
 .Linkmake{
-    display:block;
+    left:5px;
+    display: block;
     border-radius: 200px;
-    margin:30px 100px;
     padding: 10px 20px;
     background-color: bisque;
-    width: 100px;
     text-decoration: none;
     font-size: 20px;
     color:Red;
 }
+
 .Linkmake:hover{
-   
-    margin:35px 110px;
     background-color: rgb(198, 255, 196);
 }
+.ControlPag{
+    margin-bottom: 20px;
+}
+.ContenedorDOG{
+    display:grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+
+}
+.ContenedorBoton{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:5px;
+}
+.btn1{
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+    border-radius: 25px;
+}
+.btn2{
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+    border-radius: 25px;
+}
+.Mayores{
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+    border-radius: 25px;
+}
+.Menores{
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+    border-radius: 25px;
+}
+.InputSearch{
+   
+    border-radius: 25px;
+}
+.Search{
+    border-radius: 25px;
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+}
+.Reset{
+    border-radius: 25px;
+    background-color: rgb(220, 78, 78);
+    cursor:pointer;
+}
+.ORDTEMP{
+    background-color:rgb(222, 120, 120);
+}
+
+.Caja{
+    font-size: 12px;
+    background-color: rgb(182, 113, 63);
+    padding: 20px;
+    border-radius: 25px;
+    border: 5px solid white;
+}
+
+
 
 body{
     background-image: url(./Imagen\ Perros.webp);
     background-size: cover;
     background-attachment: fixed;
+    padding: 0 40px;
     }
 img {
         width: 300px;

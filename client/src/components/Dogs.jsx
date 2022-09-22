@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./Dogs.css";
 
 function Dog() {
   const { idDogs } = useParams();
@@ -11,20 +12,28 @@ function Dog() {
         .then((res) => setDog(res));
   }, [idDogs, setDog]);
   if (!dog) return null;
-  console.log(dog);
+  //console.log(dog);
   return (
     <div>
-      <h2>YOUR DOG</h2>
-      <h3>{dog.name}</h3>
-      <h2>HEIGHT</h2>
-      <h3>{dog.height}</h3>
-      <h2>WEIGHT</h2>
-      <h3>{dog.weight}</h3>
+      <h3 className="Name">{dog.name}</h3>
+      <div className="Height">
+        <h2>HEIGHT</h2>
+        <h3>{dog.height}</h3>
+      </div>
+      <div className="weight">
+        <h2>WEIGHT</h2>
+        <h3>{dog.weight}</h3>
+      </div>
+
       <img src={dog.image} alt={dog.image} />
-      <h2>TEMPERAMENT</h2>
-      <h3>{dog.temperament}</h3>
-      <h2>LIFESPAN</h2>
-      <h3>{dog.lifespan}</h3>
+      <div className="temperament">
+        <h2>TEMPERAMENT</h2>
+        <h3>{dog.temperament}</h3>
+      </div>
+      <div className="Lifespan">
+        <h2>LIFESPAN</h2>
+        <h3>{dog.lifespan}</h3>
+      </div>
     </div>
   );
 }

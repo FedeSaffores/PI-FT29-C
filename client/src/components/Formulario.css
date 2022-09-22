@@ -1,0 +1,41 @@
+.CreateDog{
+    font-size: 30px;
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 2px;
+}
+.Home{
+    text-decoration: none;
+    color:red;
+    display:block;
+    border-radius: 200px;
+    padding: 10px;
+    background-color: bisque;
+    font-size: 20px;
+    border:2px solid black;
+    width: 100px;
+}
+.Nombre{
+    margin-top: 2px;
+    width: 200px;
+    height: 25px;
+    border-radius: 10px 10px 10px 10px;
+}
+.bt1{
+    font-size: 30px;
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 2px;
+}
+.height1{
+    margin-top: 2px;
+    width: 200px;
+    height: 25px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+.error{
+    color:red;
+    font-size: 20px;
+}
