@@ -80,7 +80,8 @@ const Formulario = () => {
   const submitForm = (e) => {
     e.preventDefault();
     let objErr = {};
-    console.log(formulario.name, /^[a-zA-Z ]+$/.test(formulario.name.trim()));
+    //console.log(formulario);
+    //console.log(formulario.name, /^[a-zA-Z ]+$/.test(formulario.name.trim()));
     if (!/^[a-zA-Z ]+$/.test(formulario.name.trim())) {
       objErr["name"] = "El nombre  tiene que contener solo letras";
       //expresion regular, contiene solo letras ya sea mayuscula y minuscula.
@@ -91,12 +92,10 @@ const Formulario = () => {
     if (isNaN(parseInt(formulario.heightMin))) {
       objErr["heightMin"] = "La altura minima no es un numero";
     }
-    if (formulario.heightMax < formulario.heightMin) {
+    if (parseInt(formulario.heightMax) < parseInt(formulario.heightMin)) {
       objErr[
         "heightMax"
       ] = `La altura maximo debe ser mayor a ${formulario.heightMin}`;
-    }
-    if (formulario.heightMin > formulario.heightMax) {
       objErr[
         "heightMin"
       ] = `La altura minimo debe ser menor a ${formulario.heightMax}`;
@@ -107,12 +106,10 @@ const Formulario = () => {
     if (isNaN(parseInt(formulario.weightMax))) {
       objErr["weightMax"] = "El peso maximo no es un numero";
     }
-    if (formulario.weightMin > formulario.weightMax) {
+    if (parseInt(formulario.weightMin) > parseInt(formulario.weightMax)) {
       objErr[
         "weightMin"
       ] = `El peso minimo debe ser menor a ${formulario.weightMax}`;
-    }
-    if (formulario.weightMax < formulario.weightMin) {
       objErr[
         "weightMax"
       ] = `El peso maximo no debe ser menor a ${formulario.weightMin}`;
@@ -123,7 +120,7 @@ const Formulario = () => {
     if (isNaN(parseInt(formulario.lifespanMin))) {
       objErr["lifespanMin"] = "Es necesario agregar al menos un numero";
     }
-    if (formulario.lifespanMin > formulario.lifespanMax) {
+    if (parseInt(formulario.lifespanMin) > parseInt(formulario.lifespanMax)) {
       objErr[
         "lifespanMin"
       ] = `El Minimo expectativa de vida no puede ser mayor a ${formulario.lifespanMax}`;
@@ -166,7 +163,7 @@ const Formulario = () => {
         <div className="error">{errors?.name}</div>
         <h2 className="bt1">MINIMUM HEIGHT</h2>
         <input
-          className="height1"
+          className="Input"
           type="text"
           name="heightMin"
           autoComplete="off"
@@ -175,9 +172,9 @@ const Formulario = () => {
           onChange={setDataHandler}
         />
         <div className="error">{errors?.heightMin}</div>
-        <h2>MAXIMUM HEIGHT</h2>
+        <h2 className="bt1">MAXIMUM HEIGHT</h2>
         <input
-          className="height2"
+          className="Input"
           type="text"
           name="heightMax"
           autoComplete="off"
@@ -186,9 +183,9 @@ const Formulario = () => {
           onChange={setDataHandler}
         />
         <div className="error">{errors?.heightMax}</div>
-        <h2>MINIMUM WEIGHT</h2>
+        <h2 className="bt1">MINIMUM WEIGHT</h2>
         <input
-          className="weightMin"
+          className="Input"
           type="text"
           name="weightMin"
           autoComplete="off"
@@ -197,9 +194,9 @@ const Formulario = () => {
           onChange={setDataHandler}
         />
         <div className="error">{errors?.weightMin}</div>
-        <h2>MAXIMUM WEIGHT</h2>
+        <h2 className="bt1">MAXIMUM WEIGHT</h2>
         <input
-          className="weightMax"
+          className="Input"
           type="text"
           name="weightMax"
           autoComplete="off"
@@ -208,9 +205,9 @@ const Formulario = () => {
           onChange={setDataHandler}
         />
         <div className="error">{errors?.weightMax}</div>
-        <h2>MINIMUM LIFESPAN</h2>
+        <h2 className="bt1">MINIMUM LIFESPAN</h2>
         <input
-          className="lifemin"
+          className="Input"
           type="text"
           name="lifespanMin"
           autoComplete="off"
@@ -219,19 +216,20 @@ const Formulario = () => {
           onChange={setDataHandler}
         />
         <div className="error">{errors?.lifespanMin}</div>
-        <h2>MAXIMUM LIFESPAN</h2>
+        <h2 className="bt1">MAXIMUM LIFESPAN</h2>
         <input
-          className="lifemax"
+          className="Input"
           type="text"
           name="lifespanMax"
           autoComplete="off"
+          value={formulario.lifespanMax}
           placeholder="Put the Maximum Lifespan"
           onChange={setDataHandler}
         />
         <div className="error">{errors.lifespanMax}</div>
-        <h2>TEMPERAMENT</h2>
+        <h2 className="bt1">TEMPERAMENT</h2>
         <input
-          className="Temperamento"
+          className="Input"
           type="text"
           name="temperament"
           autoComplete="off"
