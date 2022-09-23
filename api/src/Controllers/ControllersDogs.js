@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Dog, Temperamentos } = require("../db");
-const { sequelize } = require("sequelize");
+//const { sequelize } = require("sequelize");
 
 const dogsApi = async () => {
   try {
@@ -40,7 +40,7 @@ const getAllDogs = async (req, res) => {
 const allDogs = async () => {
   const infoApi = await dogsApi();
   const infoDb = await dataBdogs();
-  console.log(infoDb);
+  //console.log(infoDb);
   const dbjoin = infoDb.map((e) => {
     return {
       id: e.id,

@@ -89,7 +89,7 @@ function Home() {
           className="ORDTEMP"
         >
           <option disabled value={"Temperament"}></option>
-          <option value="">Temperaments</option>
+          <option value="">All Temperaments</option>
           {allTemp?.map((temp, index) => (
             <option value={temp} key={index}>
               {temp}

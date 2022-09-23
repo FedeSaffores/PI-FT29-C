@@ -124,6 +124,9 @@ const Formulario = () => {
       objErr[
         "lifespanMin"
       ] = `El Minimo expectativa de vida no puede ser mayor a ${formulario.lifespanMax}`;
+      objErr[
+        "lifespanMax"
+      ] = `El Maximo expectativa de vida no debe ser menor a ${formulario.lifespanMin}`;
     }
     if (formulario.temperament.length === 0) {
       objErr["temperament"] = "Es necesario almenos agragar un temperamento";

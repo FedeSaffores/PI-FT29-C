@@ -16,7 +16,7 @@ const newDog = async (req, res) => {
       weight,
       lifespan,
     });
-    console.log(dogs);
+    //console.log(dogs);
     await Promise.all(
       temperament.map(async (e) => {
         const [temperamento, _] = await Temperamentos.findOrCreate({
@@ -52,7 +52,7 @@ async function listarTemperamento(req, res, next) {
           where: { name: e },
         });
       });
-      console.log(temperamentos);
+      //console.log(temperamentos);
     }
     const typeDb = await Temperamentos.findAll();
     return typeDb;
@@ -80,7 +80,7 @@ async function getTemperamentByID(req, res) {
     let temp = await Temperamentos.findOne({
       where: { id: req.params.idTemperament },
     });
-    console.log(temp);
+    //console.log(temp);
     res.json(temp);
   } catch (error) {
     console.log(error);

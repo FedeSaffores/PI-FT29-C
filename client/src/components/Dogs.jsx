@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Dogs.css";
 
 function Dog() {
@@ -15,6 +16,9 @@ function Dog() {
   //console.log(dog);
   return (
     <div>
+      <Link to="/dogs" className="Home">
+        HOME
+      </Link>
       <h3 className="Name">{dog.name}</h3>
       <div className="Height">
         <h2>HEIGHT</h2>
