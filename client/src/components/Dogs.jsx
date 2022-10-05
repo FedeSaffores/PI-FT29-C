@@ -20,6 +20,7 @@ function Dog() {
         HOME
       </Link>
       <h3 className="Name">{dog.name}</h3>
+      <img src={dog.image} alt={dog.image} />
       <div className="Height">
         <h2>HEIGHT</h2>
         <h3>{dog.height}</h3>
@@ -29,7 +30,6 @@ function Dog() {
         <h3>{dog.weight}</h3>
       </div>
 
-      <img src={dog.image} alt={dog.image} />
       <div className="temperament">
         <h2>TEMPERAMENT</h2>
         <h3>{dog.temperament}</h3>

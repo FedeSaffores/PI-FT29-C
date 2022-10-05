@@ -24,7 +24,6 @@ function Home() {
       ).flat()
     ),
   ]);
-
   const [temp, setTemp] = useState("");
   const [page, setPage] = useState(0);
   const [busqueda, setBusqueda] = useState("");
@@ -43,7 +42,6 @@ function Home() {
     dispatch(getDogs());
     dispatch(getTemperamentos());
   }, [dispatch]);
-
   return (
     <div>
       <div className="ContenedorBoton">
@@ -54,7 +52,7 @@ function Home() {
 
         <button className="btn2" onClick={() => dispatch(ordRevAlf())}>
           {" "}
-          ORD Alf Z-A
+          ORD ALF Z-A
         </button>
         <button className="Mayores" onClick={() => dispatch(ordXMayorPeso())}>
           ORD MAYORES
@@ -62,10 +60,10 @@ function Home() {
         <button className="Menores" onClick={() => dispatch(ordXMenorPeso())}>
           ORD MENOR
         </button>
+
         <Link className="Linkmake" to={"/makedog"}>
           Make your Dog
         </Link>
-
         <input
           type="text"
           placeholder="Search by Name"
@@ -73,6 +71,7 @@ function Home() {
           name="input"
           autoComplete="off"
           onChange={inputHandler}
+          value={busqueda}
         />
         <button className="Search" onClick={onClickHandler}>
           SEARCH
@@ -80,6 +79,7 @@ function Home() {
         <button className="Reset" onClick={homeHandler}>
           RESET
         </button>
+
         <select
           onChange={(e) => {
             setTemp(e.target.value);

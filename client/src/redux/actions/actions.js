@@ -12,22 +12,21 @@ import {
 
 export function getDogs() {
   return async (dispatch) => {
-    const res = await axios.get("http://localhost:3001/dogs/");
+    const res = await axios.get("/dogs/");
     dispatch({ type: GET_DOGS, payload: res.data });
   };
 }
+
 export function getDetail(idDogs) {
   return async (dispatch) => {
-    const res = await axios.get(`http://localhost:3001/dogs/${idDogs}`);
+    const res = await axios.get(`/dogs/${idDogs}`);
     dispatch({ type: GET_DETAIL, payload: res.data });
   };
 }
 export function getDogsByName(name) {
   return async (dispatch) => {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/dogs/name?name=${name}`
-      );
+      const res = await axios.get(`/dogs/name?name=${name}`);
       dispatch({ type: GET_DOG_NAME, payload: res.data });
     } catch (error) {
       dispatch({ type: GET_DOG_NAME, payload: [] });
@@ -38,9 +37,7 @@ export function getDogsByName(name) {
 export function getTemperamentos(name) {
   return async (dispatch) => {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/temperamentos/search?name=${name}`
-      );
+      const res = await axios.get(`/temperamentos/search?name=${name}`);
       dispatch({ type: GET_TEMPERAMENTOS, payload: res.data });
     } catch (error) {
       throw error;
@@ -68,10 +65,11 @@ export function ordXMenorPeso() {
     type: ORD_MENOR_PESO,
   };
 }
+
 export function createDogs(dog) {
   return async function () {
     try {
-      const newRecipe = await axios.post("http://localhost:3001/mekeDogs", dog);
+      const newDog = await axios.post("/mekeDogs", dog);
     } catch (err) {
       throw err;
     }

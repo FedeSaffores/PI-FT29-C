@@ -1,6 +1,5 @@
 const axios = require("axios");
 const { Dog, Temperamentos } = require("../db");
-//const { sequelize } = require("sequelize");
 
 const dogsApi = async () => {
   try {
@@ -96,7 +95,7 @@ const getId = async (req, res) => {
         include: {
           model: Temperamentos,
           attributtes: ["name"],
-          throught: { atrributtes: [] },
+          throught: { attributes: [] },
         },
       });
       const dog = {

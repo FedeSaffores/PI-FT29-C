@@ -80,11 +80,8 @@ const Formulario = () => {
   const submitForm = (e) => {
     e.preventDefault();
     let objErr = {};
-    //console.log(formulario);
-    //console.log(formulario.name, /^[a-zA-Z ]+$/.test(formulario.name.trim()));
     if (!/^[a-zA-Z ]+$/.test(formulario.name.trim())) {
       objErr["name"] = "El nombre  tiene que contener solo letras";
-      //expresion regular, contiene solo letras ya sea mayuscula y minuscula.
     }
     if (isNaN(parseInt(formulario.heightMax))) {
       objErr["heightMax"] = "La altura maximo no es un numero";
@@ -161,6 +158,7 @@ const Formulario = () => {
           name="name"
           autoComplete="off"
           placeholder="Name your Dog"
+          value={formulario.name}
           onChange={setDataHandler}
         />
         <div className="error">{errors?.name}</div>
