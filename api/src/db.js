@@ -20,12 +20,12 @@ let sequelize =
         dialectOptions: {
           ssl: {
             require: true,
-            rejectUnauthorized: true,
+            rejectUnauthorized: false,
           },
           keepAlive: true,
         },
         ssl: {
-          rejectUnauthorized: true,
+          rejectUnauthorized: false,
         },
       })
     : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
